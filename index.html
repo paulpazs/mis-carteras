@@ -1,0 +1,37 @@
+<!doctype html>
+<html lang="es">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover">
+<title>Mis Carteras</title>
+<meta name="description" content="Registro de ingresos, gastos y saldos por cartera.">
+<meta name="theme-color" content="#0B1F3A">
+<link rel="manifest" href="manifest.webmanifest">
+<link rel="icon" href="icon-192.png" type="image/png">
+<link rel="apple-touch-icon" href="icon-192.png">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Bricolage+Grotesque:opsz,wght@12..96,600;12..96,700&family=Figtree:wght@400;500;600;700&display=swap">
+<link rel="stylesheet" href="styles.css">
+</head>
+<body>
+<div id="app">
+  <header class="hero" id="hero"></header>
+  <main class="col" id="view"></main>
+</div>
+<nav class="tabbar" aria-label="Secciones">
+  <div class="tabbar-in">
+    <button class="tab" data-tab="home"><svg class="i" viewBox="0 0 24 24" aria-hidden="true"><path d="M3 11.5 12 4l9 7.5M5.5 10v9.5h13V10M10 19.5v-5h4v5"/></svg><span>Inicio</span></button>
+    <button class="tab" data-tab="tx"><svg class="i" viewBox="0 0 24 24" aria-hidden="true"><path d="M8 6h12M8 12h12M8 18h12M4 6h.01M4 12h.01M4 18h.01"/></svg><span>Movimientos</span></button>
+    <button class="add" data-act="openNew" aria-label="Agregar movimiento"><svg class="i" viewBox="0 0 24 24" aria-hidden="true"><path d="M12 5v14M5 12h14"/></svg></button>
+    <button class="tab" data-tab="bud"><svg class="i" viewBox="0 0 24 24" aria-hidden="true"><path d="M4 6.5h16v13H4zM4 10.5h16M8 4v4M16 4v4"/></svg><span>Pagos</span><i class="dot" id="payDot" hidden></i></button>
+    <button class="tab" data-tab="acc"><svg class="i" viewBox="0 0 24 24" aria-hidden="true"><path d="M3.5 7.5A2 2 0 0 1 5.5 5.5H17v3M3.5 7.5v10a2 2 0 0 0 2 2h13a1 1 0 0 0 1-1v-8.5a1 1 0 0 0-1-1h-13a2 2 0 0 1-2-1.5M16 14h.01"/></svg><span>Carteras</span></button>
+  </div>
+</nav>
+<div id="sheetRoot"></div>
+<div id="toast" role="status" aria-live="polite"></div>
+<input type="file" id="impFile" accept=".json,application/json" hidden>
+<noscript>Esta app necesita JavaScript.</noscript>
+<script src="app.js"></script>
+</body>
+</html>
