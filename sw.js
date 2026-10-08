@@ -1,5 +1,5 @@
 // Mis Carteras: funciona sin internet. Guarda la app en el teléfono y la actualiza en segundo plano.
-const CACHE = 'mis-carteras-v2';
+const CACHE = 'mis-carteras-v3';
 const SHELL = ['./', 'index.html', 'styles.css', 'app.js', 'manifest.webmanifest', 'icon-192.png', 'icon-512.png', 'icon-maskable.png'];
 
 self.addEventListener('install', e => {

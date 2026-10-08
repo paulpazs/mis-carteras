@@ -436,7 +436,7 @@ function manualHTML() {
       .map(([v, n]) => `<button class="${s.type === v ? 'on' : ''}" data-act="txType" data-v="${v}" aria-pressed="${s.type === v}">${n}</button>`).join('')}</div>`;
   }
   h += moneyField('fAmount', s.amount, 'Monto');
-  h += `<label class="field"><span>Descripción</span><input id="fDesc" class="inp" maxlength="120" placeholder="Ej: pan y bebida" value="${esc(s.desc)}"></label>`;
+  h += `<label class="field"><span>${adj ? 'Nota' : 'Descripción'}</span><input id="fDesc" class="inp" maxlength="120" placeholder="Ej: pan y bebida" value="${esc(s.desc)}"></label>`;
   if (!adj && !tr) {
     const list = s.type === 'ingreso' ? CAT_IN : CAT_OUT;
     h += `<div class="field"><span>Categoría</span><div class="cats">${list.map(c => `<button type="button" class="cat ${s.cat === c.id ? 'on' : ''}" data-act="catPick" data-id="${c.id}" aria-pressed="${s.cat === c.id}"><span class="ico" style="--k:var(--${c.color})">${ic(c.icon)}</span><span>${esc(c.name)}</span></button>`).join('')}</div></div>`;
@@ -473,6 +473,7 @@ function openAdjust(id) {
   ADJ = { id };
   openShell('Ajustar saldo', `<p class="note">${esc(a.name)}: saldo actual <b>${fmt(balance(id))}</b>. Ingresa el saldo real y se registra la diferencia como ajuste.</p>
     ${moneyField('aReal', 0, 'Saldo real')}<p id="aDiff" class="note"></p>
+    <label class="field"><span>Nota (opcional)</span><input id="aNote" class="inp" maxlength="120" placeholder="Ej: diferencia por comisión del banco" autocomplete="off"></label>
     <div class="actions"><button class="btn primary grow" data-act="saveAdj">Guardar ajuste</button></div>`);
 }
 function updateAdjDiff() {
@@ -486,7 +487,7 @@ function saveAdj() {
   const d = digits(el.value) - balance(ADJ.id);
   if (d === 0) { toast('El saldo ya coincide.'); closeSheet(); return; }
   const id = newId('t');
-  const doc = { type: 'ajuste', amount: d, description: 'Ajuste de saldo', category: 'ajuste', account: ADJ.id, date: today(), order: Date.now() };
+  const doc = { type: 'ajuste', amount: d, description: ($('#aNote') ? $('#aNote').value.trim() : '') || 'Ajuste de saldo', category: 'ajuste', account: ADJ.id, date: today(), order: Date.now() };
   if (write(() => DB.setTx(id, doc), 'Saldo ajustado')) closeSheet();
 }
 
